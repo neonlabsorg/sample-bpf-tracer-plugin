@@ -13,14 +13,17 @@ impl BpfTracerPlugin for SampleBpfTracerPlugin {
     fn trace_bpf<'a>(
         &mut self,
         program_id: &Pubkey,
-        blockhash: &Hash,
+        block_hash: &Hash,
+        transaction_id: &[u8],
         _trace_analyzer: &TraceAnalyzer,
         trace: &[TraceItem],
     ) -> Result<()> {
+        let transaction_id = solana_sdk::bs58::encode(transaction_id).into_string();
         println!(
-            "BPF Tracing for program ID: {}, block hash: {}, {} record(s)",
+            "BPF Tracing for program ID: {}, transaction ID: {}, block hash: {}, {} record(s)",
             program_id,
-            blockhash,
+            transaction_id,
+            block_hash,
             trace.len()
         );
 
