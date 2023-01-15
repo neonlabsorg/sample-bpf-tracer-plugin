@@ -1,5 +1,9 @@
-use solana_bpf_tracer_plugin_interface::bpf_tracer_plugin_interface::{BpfTracerPlugin, Result};
-use solana_rbpf::vm::{TraceAnalyzer, TraceItem};
+use std::sync::Arc;
+
+use solana_bpf_tracer_plugin_interface::bpf_tracer_plugin_interface::{
+    BpfTracerPlugin, ExecutorAdditional, Result,
+};
+use solana_rbpf::static_analysis::TraceLogEntry;
 use solana_sdk::{hash::Hash, pubkey::Pubkey};
 
 #[derive(Debug)]
@@ -10,13 +14,13 @@ impl BpfTracerPlugin for SampleBpfTracerPlugin {
         "Sample BPF tracing plugin"
     }
 
-    fn trace_bpf<'a>(
+    fn trace_bpf(
         &mut self,
         program_id: &Pubkey,
         block_hash: &Hash,
         transaction_id: &[u8],
-        _trace_analyzer: &TraceAnalyzer,
-        trace: &[TraceItem],
+        trace: &[TraceLogEntry],
+        _executor: Arc<dyn ExecutorAdditional>,
     ) -> Result<()> {
         let transaction_id = solana_sdk::bs58::encode(transaction_id).into_string();
         println!(
