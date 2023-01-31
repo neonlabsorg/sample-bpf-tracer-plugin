@@ -20,7 +20,7 @@ impl BpfTracerPlugin for SampleBpfTracerPlugin {
         block_hash: &Hash,
         transaction_id: &[u8],
         trace: &[TraceLogEntry],
-        consumed_bpf_units: &[u64],
+        consumed_bpf_units: &[(usize, u64)],
         _executor: Arc<dyn ExecutorAdditional>,
     ) -> Result<()> {
         let transaction_id = solana_sdk::bs58::encode(transaction_id).into_string();
