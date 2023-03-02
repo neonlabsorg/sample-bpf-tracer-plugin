@@ -5,7 +5,7 @@ name = "sample-bpf-tracer-plugin"
 version = "0.1.0"
 edition = "2021"
 description = "Sample BPF tracing plugin for Solana validator"
-authors = ["NeonLabs Maintainers <maintainers@neonlabs.org>"]
+authors = ["Neon Labs Maintainers <maintainers@neonlabs.org>"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -14,5 +14,5 @@ crate-type = ["cdylib", "rlib"]
 anyhow = "=1.0.65"
 thiserror = "=1.0.36"
 solana-bpf-tracer-plugin-interface = { git = "https://github.com/neonlabsorg/solana.git", branch = "bpf-tracing-plugins" }
-solana_rbpf = "=0.2.38"
+solana_rbpf = "=0.2.39"
 solana-sdk = { git = "https://github.com/neonlabsorg/solana.git", branch = "bpf-tracing-plugins" }
